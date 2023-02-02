@@ -17,6 +17,7 @@ body {
   color: var(--color-white);
   background-color: var(--color-black);
   cursor: default;
+  padding: 20px;
 }
 
 .container {
@@ -142,4 +143,15 @@ body {
 }
 .movies .movie .info .title {
   color: var(--color-white);
+}
+
+/* view-more */
+.view-more {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  margin: 20px auto;
+}
+.view-more.hide {
+  display: none;
 }
