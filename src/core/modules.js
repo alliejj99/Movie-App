@@ -61,10 +61,13 @@ export class Store {
       // defineProperty: 객체 데이터의 어떠한 속성을 정의할때 사용하는 메소드
       // (속성, 속성의 이름, {get데이터, set데이터})
       Object.defineProperty(this.state, key, {
-        get: () => state[key], // statep['message']
+        get: () => state[key], // state['message']
         set: (val) => {
           state[key] = val;
-          this.observers[key].forEach((observer) => observer(val));
+          if (Array.isArray(this.observers[key])) {
+            // 호출할 콜백이 있는 경우!
+            this.observers[key].forEach((observer) => observer(val));
+          }
         },
       });
     }
