@@ -5,10 +5,12 @@ const customStore = new Store({
   page: 1,
   pageMax: 1,
   movies: [],
+  loading: false,
 });
 
 export default customStore;
 export const searchMovies = async (page) => {
+  customStore.state.loading = true;
   customStore.state.page = page;
   // 페이지 번호가 1페이지면 기존 데이터는 초기화
   if (page === 1) {
@@ -24,4 +26,5 @@ export const searchMovies = async (page) => {
   const { Search, totalResults } = await res.json();
   customStore.state.movies = [...customStore.state.movies, ...Search];
   customStore.state.pageMax = Math.ceil(Number(totalResults) / 10);
+  customStore.state.loading = false;
 };
