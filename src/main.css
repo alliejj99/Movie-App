@@ -309,4 +309,46 @@ footer a:hover {
   font-weight: 700;
   text-align: center;
   color: var(--color-white-10);
+  word-break: keep-all;
+}
+
+/* 반응형 */
+@media (max-width: 1200px) {
+  .container {
+    padding: 40px;
+  }
+  .the-movie {
+    gap: 30px;
+  }
+  .the-movie .poster {
+    --width: 300px;
+  }
+}
+@media (max-width: 720px) {
+  .the-movie {
+    display: block;
+  }
+  .the-movie .title {
+    margin-top: 50px;
+    font-size: 50px;
+  }
+}
+@media (max-width: 600px) {
+  .container {
+    padding: 40px 20px;
+  }
+  header {
+    padding: 14px 20px;
+  }
+  header nav {
+    display: none;
+  }
+  header .user {
+    right: 20px;
+  }
+  .headline h1 {
+    font-size: 60px;
+  }
+  .the-movie {
+  }
 }
