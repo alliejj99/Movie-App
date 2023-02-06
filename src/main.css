@@ -160,3 +160,42 @@ body {
 .view-more.hide {
   display: none;
 }
+
+/* the-movie */
+.the-movie {
+  display: flex;
+  gap: 70px;
+  color: var(--color-white-50);
+}
+.the-movie .poster {
+  /* 감소너비 비율을 기본값을 1로 사용하지 않는다*/
+  flex-shrink: 0;
+  --width: 500px;
+  width: var(--width);
+  height: calc(var(--width) * 3 / 2);
+  border-radius: 10px;
+  background-size: cover;
+  background-color: var(--color-area);
+}
+.the-movie .specs {
+  flex-grow: 1;
+}
+.the-movie .title {
+  margin-bottom: 30px;
+  font-family: "Oswald", sans-serif;
+  font-size: 70px;
+  line-height: 1;
+  color: var(--color-white);
+}
+.the-movie .labels {
+  margin-bottom: 20px;
+  color: var(--color-primary);
+}
+.the-movie .plot {
+}
+.the-movie h3 {
+  margin: 24px 0 6px;
+  font-family: "Oswald", sans-serif;
+  font-size: 20px;
+  color: var(--color-white);
+}
