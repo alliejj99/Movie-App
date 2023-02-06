@@ -59,7 +59,7 @@ export default class TheHeader extends Component {
       </nav>
 
       <a href="#/about" class="user">
-        <img src="../../favicon.png" alt="User">
+        <img src="https://i.pinimg.com/564x/53/6c/a3/536ca3eb5f5e1c497acb6b120c870191.jpg" alt="User">
       </a>
     `;
   }
