@@ -187,11 +187,19 @@ body {
   line-height: 1;
   color: var(--color-white);
 }
+.the-movie .title.skeleton {
+  height: 70px;
+}
 .the-movie .labels {
   margin-bottom: 20px;
   color: var(--color-primary);
 }
-.the-movie .plot {
+.the-movie .labels.skeleton {
+  height: 30px;
+}
+.the-movie .plot.skeleton {
+  width: 80%;
+  height: 400px;
 }
 .the-movie h3 {
   margin: 24px 0 6px;
