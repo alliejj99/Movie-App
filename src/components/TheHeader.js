@@ -21,6 +21,11 @@ export default class TheHeader extends Component {
         ],
       },
     });
+
+    // popstate => 페이지가 바뀔때마다 실행
+    window.addEventListener("popstate", () => {
+      this.render();
+    });
   }
 
   render() {
@@ -33,9 +38,17 @@ export default class TheHeader extends Component {
         <ul>
           ${this.state.menus
             .map((menu) => {
+              const href = menu.href.split("?")[0];
+              const hash = location.hash.split("?")[0];
+
+              const isActive = href === hash;
+
               return /* html */ `
               <li>
-                <a href="${menu.href}">
+                <a 
+                  href="${menu.href}"
+                  class ="${isActive ? "active" : ""}"
+                >
                   ${menu.name}
                 </a>
               </li>
