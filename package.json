@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "dotenv": "^16.0.3",
     "parcel": "^2.8.3",
     "vercel": "^28.15.0"
   },
