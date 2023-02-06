@@ -17,7 +17,6 @@ body {
   color: var(--color-white);
   background-color: var(--color-black);
   cursor: default;
-  padding: 20px;
 }
 
 .container {
@@ -49,6 +48,59 @@ body {
 .btn-primary:hover {
   color: var(--color-white);
   background-color: var(--color-hover);
+}
+
+/* header */
+header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: flex-end;
+  gap: 40px;
+  padding: 20px 40px;
+  background-color: rgba(14, 17, 27, 0.9);
+  z-index: 9;
+}
+header .logo {
+  font-size: 20px;
+  font-family: "Oswald", sans-serif;
+  color: var(--color-white);
+  text-decoration: none;
+}
+header .logo span {
+  color: var(--color-primary);
+}
+header nav ul {
+  display: flex;
+  gap: 14px;
+}
+header nav ul li a {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-white-50);
+  text-decoration: none;
+}
+header nav ul li a.active {
+  color: var(--color-primary);
+}
+header .user {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 40px;
+  margin: auto;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--color-area);
+  transition: 0.3s;
+  cursor: pointer;
+}
+header .user:hover {
+  transform: scale(1.2);
+}
+header .user img {
+  width: 100%;
 }
 
 /* headline */
