@@ -1,10 +1,30 @@
 //======================== COMPONENT ========================//
+
+interface ComponentPayload {
+  tagName?: string;
+  props?: {
+    [key: string]: unknown;
+  };
+  state?: {
+    [key: string]: unknown;
+  };
+}
+
 export class Component {
-  constructor(payload = {}) {
-    const { tagName = "div", state = {}, props = {} } = payload;
-    this.el = document.createElement(tagName);
-    this.state = state;
-    this.props = props;
+  public el;
+  public props;
+  public state;
+
+  constructor(payload: ComponentPayload = {}) {
+    const {
+      tagName = "div", // 최상위 요소의 태그 이름
+      state = {},
+      props = {},
+    } = payload;
+
+    this.el = document.createElement(tagName); // 컴포넌트의 최상위 요소
+    this.props = props; // 컴포넌트가 사용될 때 부모 컴포넌트에서 받는 데이터
+    this.state = state; // 컴포넌트 안에서 사용할 데이터
     this.render();
   }
   render() {
@@ -18,26 +38,27 @@ function routeRender(routes) {
   if (!location.hash) {
     history.replaceState(null, "", "/#/"); // 기록을 남기지 않고 페이지 이동
   }
-
   const routerView = document.querySelector("router-view");
   const [hash, queryString = ""] = location.hash.split("?");
-  // a=123&b=456
-  // ['a=123', 'b=456']
-  // { a: '123', b: '456'}
-  const query = queryString.split("&").reduce((acc, cur) => {
-    const [key, value] = cur.split("=");
-    acc[key] = value;
-    return acc;
-  }, {});
-  history.replaceState(query, ""); // 주소 생략
+  // 1. 쿼리스트링을 객체로 변환해 히스토리의 상태에 저장!
 
-  const currentRoute = routes.find((route) =>
-    new RegExp(`${route.path}/?$`).test(hash)
+  const query = queryString
+    .split("&")
+    .reduce((acc, cur) => {
+      const [key, value] = cur.split("=");
+      acc[key] = value;
+      return acc;
+    }, {});
+  history.replaceState(query, ""); // (상태, 제목)
+
+  // 2. 현재 라우트 정보를 찿아서 렌더링!
+  const currentRoute = routes
+    .find((route) => new RegExp(`${route.path}/?$`).test(hash)
+    routerView.innerHTML = "";
+    routerView.append(new currentRoute.component().el);
   );
-
-  routerView.innerHTML = "";
-  routerView.append(new currentRoute.component().el);
-
+  
+  // 3. 화면 출력후 스크롤 위치 복구!
   window.scrollTo(0, 0);
 }
 
