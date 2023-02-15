@@ -1,6 +1,6 @@
 import { Store } from "../core/modules";
 
-interface SimpleMovie {
+export interface SimpleMovie {
   Title: string;
   Year: string;
   imdbID: string;
