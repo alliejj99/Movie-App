@@ -34,35 +34,48 @@ export class Component {
 }
 
 //======================== ROUTER ========================//
-function routeRender(routes) {
+interface Route {
+  path: string
+  component: typeof Component
+}
+type Routes = Route[]
+
+// 페이지 렌더링!
+function routeRender(routes: Routes) {
   if (!location.hash) {
     history.replaceState(null, "", "/#/"); // 기록을 남기지 않고 페이지 이동
   }
   const routerView = document.querySelector("router-view");
   const [hash, queryString = ""] = location.hash.split("?");
+ 
   // 1. 쿼리스트링을 객체로 변환해 히스토리의 상태에 저장!
-
+  interface Query {
+    [key: string] : string
+  }
   const query = queryString
     .split("&")
     .reduce((acc, cur) => {
       const [key, value] = cur.split("=");
       acc[key] = value;
       return acc;
-    }, {});
+    }, {} as Query);
   history.replaceState(query, ""); // (상태, 제목)
 
   // 2. 현재 라우트 정보를 찿아서 렌더링!
   const currentRoute = routes
-    .find((route) => new RegExp(`${route.path}/?$`).test(hash)
+    .find((route) => new RegExp(`${route.path}/?$`).test(hash))
+  if(routerView){
     routerView.innerHTML = "";
-    routerView.append(new currentRoute.component().el);
-  );
+    currentRoute && routerView.append(new currentRoute.component().el);
+  }
+  
   
   // 3. 화면 출력후 스크롤 위치 복구!
   window.scrollTo(0, 0);
 }
 
-export function createRouter(routes) {
+export function createRouter(routes:Routes) {
+  // 원하는(필요한) 곳에서 호출할 수 있도록 함수 데이터를 반환!
   return function () {
     // 주소가 변경되면 실행 popstate
     window.addEventListener("popstate", () => {
