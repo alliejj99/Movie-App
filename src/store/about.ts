@@ -1,6 +1,15 @@
 import { Store } from "../core/modules";
 
-export default new Store({
+interface State {
+  photo: string;
+  name: string;
+  email: string;
+  blog: string;
+  github: string;
+  repository: string;
+}
+
+export default new Store<State>({
   photo:
     "https://i.pinimg.com/564x/53/6c/a3/536ca3eb5f5e1c497acb6b120c870191.jpg",
   name: "JANG A REUM",
