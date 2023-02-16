@@ -1,66 +1,17 @@
 import { Store } from "../core/modules";
 
-export interface SimpleMovie {
-  Title: string;
-  Year: string;
-  imdbID: string;
-  Type: string;
-  Poster: string;
-}
-
-interface DetailedMovie {
-  Title: string;
-  Year: string;
-  Rated: string;
-  Released: string;
-  Runtime: string;
-  Genre: string;
-  Director: string;
-  Writer: string;
-  Actors: string;
-  Plot: string;
-  Language: string;
-  Country: string;
-  Awards: string;
-  Poster: string;
-  Ratings: {
-    Source: string;
-    Value: string;
-  }[];
-  Metascore: string;
-  imdbRating: string;
-  imdbVotes: string;
-  imdbID: string;
-  Type: string;
-  DVD: string;
-  BoxOffice: string;
-  Production: string;
-  Website: string;
-  Response: string;
-}
-
-interface State {
-  searchText: string;
-  page: number;
-  pageMax: number;
-  movies: SimpleMovie[];
-  movie: DetailedMovie;
-  loading: boolean;
-  message: string;
-}
-
-const customStore = new Store<State>({
+const customStore = new Store({
   searchText: "",
   page: 1,
   pageMax: 1,
   movies: [],
-  movie: {} as DetailedMovie,
+  movie: {},
   loading: false,
   message: "Search For The Movie Title",
 });
 
 export default customStore;
-export const searchMovies = async (page: number) => {
+export const searchMovies = async (page) => {
   customStore.state.loading = true;
   customStore.state.page = page;
   // 페이지 번호가 1페이지면 기존 데이터는 초기화
@@ -93,7 +44,7 @@ export const searchMovies = async (page: number) => {
   }
 };
 
-export const getMovieDetails = async (id: string) => {
+export const getMovieDetails = async (id) => {
   try {
     const res = await fetch("/api/movie", {
       method: "POST", // 메소드가 get이 되면 body부분을 서버로 제대로 전달하지 못할 수 있으므로 'POST'를 명시한다.

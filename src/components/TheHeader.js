@@ -1,16 +1,6 @@
 import { Component } from "../core/modules";
 
-interface State {
-  [key: string]: unknown;
-  menus: {
-    name: string;
-    href: string;
-  }[];
-}
-
 export default class TheHeader extends Component {
-  public state!: State; // 초기화 값이 없어도 할당되어 있는것 처럼 사용하겠다는 의미
-
   constructor() {
     super({
       tagName: "header",
@@ -32,7 +22,7 @@ export default class TheHeader extends Component {
       },
     });
 
-    // popstate => 페이지가 바뀔때마다 실행(hash가 바뀔때 마다)
+    // popstate => 페이지가 바뀔때마다 실행
     window.addEventListener("popstate", () => {
       this.render();
     });
